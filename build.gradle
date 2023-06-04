@@ -1,0 +1,31 @@
+plugins {
+  id 'java'
+}
+
+group = 'com.zyntaxmind'
+version = '1.0.0'
+sourceCompatibility = '17'
+
+repositories {
+  mavenCentral()
+  maven {
+    url = uri("https://pkgs.dev.azure.com/zyntaxmind/open-libs/_packaging/open-feed/maven/v1")
+  }
+}
+
+java {
+  withSourcesJar()
+}
+
+ext {
+  set('keycloakVersion', "21.1.1")
+}
+
+dependencies {
+  implementation "org.keycloak:keycloak-admin-client:${keycloakVersion}"
+  implementation "com.zyntaxmind:keycloak-admin-extension-model:1.0.0"
+}
+
+tasks.named('test') {
+  useJUnitPlatform()
+}
